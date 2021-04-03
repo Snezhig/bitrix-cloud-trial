@@ -1,0 +1,35 @@
+{
+  "name": "snezhig/bitrix-cloud-trial",
+  "description": "Simple code to demonstrate it as a trial task",
+  "type": "bitrix-module",
+  "license": "MIT",
+  "keywords": [
+    "bitrix",
+    "trial",
+    "test"
+  ],
+  "authors": [
+    {
+      "name": "Maxim Strekalov",
+      "email": "snezhig.git@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "XS\\BX24\\Trial\\": "App"
+    }
+  },
+  "require": {
+    "php": "^7.4",
+    "ext-curl": "*",
+    "ext-json": "*",
+    "guzzlehttp/guzzle": "^7.0",
+    "fzaninotto/faker": "^1.9",
+    "ext-pdo": "*",
+    "illuminate/collections": "^8.35"
+  },
+  "require-dev": {
+    "kint-php/kint": "^3.2.2"
+  },
+  "minimum-stability": "stable"
+}

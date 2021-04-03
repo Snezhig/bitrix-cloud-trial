@@ -1,0 +1,7 @@
+.docker/.env
+.ssh
+.composer
+.bash_history
+*.sqlite*
+vendor
+.idea
