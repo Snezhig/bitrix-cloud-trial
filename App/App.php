@@ -2,9 +2,11 @@
 
 namespace XS\BX24\Trial;
 
+use Dotenv\Dotenv;
+use Dotenv\Repository\Adapter\EnvConstAdapter;
+use Dotenv\Repository\Adapter\PutenvAdapter;
+use Dotenv\Repository\RepositoryBuilder;
 use XS\BX24\Trial\Console\Command;
-use XS\BX24\Trial\Database\Connection;
-use XS\BX24\Trial\Database\SQLite;
 
 class App
 {
@@ -14,7 +16,21 @@ class App
      */
     public function run()
     {
-        Connection::addConnection('sqlite', SQLite::Create('/var/www/db.sqlite3'));
+        $repository = RepositoryBuilder::createWithNoAdapters()
+            ->addAdapter(EnvConstAdapter::class)
+            ->addWriter(PutenvAdapter::class)
+            ->allowList([
+                'ENABLE_LEAD_AUTOGENERATE',
+                'BITRIX_URL',
+                'BITRIX_KEY',
+                'BITRIX_KEY_USER_ID',
+                'DB_DRIVER',
+                'DB_HOST',
+                'DB_NAME',
+                'DB_USER',
+                'DB_PASSWORD',
+            ])->immutable()->make();
+        Dotenv::create($repository, __DIR__ . '/../.docker')->load();
         Command::exec();
     }
 }

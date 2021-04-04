@@ -8,6 +8,7 @@ services:
       args:
         PHP_VERSION: ${PHP_VERSION}
         COMPOSER_VERSION: ${COMPOSER_VERSION}
+        ENABLE_LEAD_AUTOGENERATE: ${ENABLE_LEAD_AUTOGENERATE}
     working_dir: /var/www
     volumes:
       - ~/.ssh:/var/www/.ssh
@@ -16,9 +17,6 @@ services:
       - "${INTERFACE}:${PHP_FPM_PORT}:9000"
     environment:
       XDEBUG_CONFIG: "client_host=${XDEBUG_HOST} start_with_request=${XDEBUG_START_WITH_REQUEST} mode=${XDEBUG_MODE}"
-      BITRIX_URL: "${BITRIX_URL}"
-      BITRIX_KEY: "${BITRIX_KEY}"
-      BITRIX_KEY_USER_ID: "${BITRIX_KEY_USER_ID}"
 volumes:
   project:
     driver: local

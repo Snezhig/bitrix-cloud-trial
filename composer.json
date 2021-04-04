@@ -26,7 +26,8 @@
     "guzzlehttp/guzzle": "^7.0",
     "fzaninotto/faker": "^1.9",
     "ext-pdo": "*",
-    "illuminate/collections": "^8.35"
+    "illuminate/collections": "^8.35",
+    "vlucas/phpdotenv": "^5.3"
   },
   "require-dev": {
     "kint-php/kint": "^3.2.2"

@@ -27,7 +27,7 @@ class UserAddCommand implements CommandContract
 
     public function handle()
     {
-        $mapper = new UserMapper(Connection::getConnection('sqlite')->pdo());
+        $mapper = new UserMapper(Connection::getInstance()->pdo());
         $user = new User(['bx_id' => $this->bxId, 'last_lead_timestamp' => $this->lastLeadTimestamp]);
         if ($mapper->insert($user)) {
             echo "User has been created\n";

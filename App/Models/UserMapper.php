@@ -27,7 +27,6 @@ class UserMapper
             ':id'    => $user->getBxId(),
             ':stamp' => $user->getLastLeadTimestamp()
         ]);
-        d($this->pdo->lastInsertId());
         return (int)$this->pdo->lastInsertId() === $user->getBxId();
     }
 

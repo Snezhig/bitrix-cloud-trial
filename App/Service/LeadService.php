@@ -9,6 +9,7 @@ use XS\BX24\Trial\Database\SQLite;
 use XS\BX24\Trial\Models\UserMapper;
 use XS\BX24\Trial\Rest\Client;
 use XS\BX24\Trial\Rest\Crm\LeadClient;
+use XS\BX24\Trial\Rest\Crm\QuoteClient;
 use XS\BX24\Trial\Rest\RestClient;
 
 class LeadService
@@ -23,7 +24,7 @@ class LeadService
 
     public function generate()
     {
-        $users = Collection::make((new UserMapper(Connection::getConnection('sqlite')->pdo()))->getAll());
+        $users = Collection::make((new UserMapper(Connection::getInstance()->pdo()))->getAll());
         $user = $users->sort(static function ($first, $second) {
             return $first->getLastLeadTimestamp() > $second->getLastLeadTimestamp();
         })->first(static function ($user) {
@@ -44,6 +45,17 @@ class LeadService
         ])->getResult();
         $service = new TaskService($this->client);
         $service->createForLead($leadId, $user);
+        //Time's up
+        (new QuoteClient(Client::getInstance()))
+            ->add(['fields' => [
+                'TITLE'          => $faker->title,
+                'ASSIGNED_BY_ID' => $user->getBxId(),
+                'OPPORTUNITY'    => $faker->numberBetween(10000, 100000),
+                'LEAD_ID' => $leadId
+            ]
+            ]);
+
+
         return true;
     }
 }
