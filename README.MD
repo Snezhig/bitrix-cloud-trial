@@ -6,5 +6,6 @@
 * Generate lead and task in one command
 
 ### Console
+* `index.php tables:create` - create base tables
 * `index.php user:add id timestamp` - create user to create a lead in the future
 * `index php lead:generate` - create a lead and task for user who is working now
